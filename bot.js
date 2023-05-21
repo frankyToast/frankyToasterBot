@@ -12,7 +12,6 @@ const opts = {
 };
 
 
-
 // Create a client with our options
 const client = new tmi.client(opts);
 
@@ -25,29 +24,38 @@ client.connect();
 
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) {
-    if (self) { return; } // Ignore messages from the bot
+  if (self) { return; } // Ignore messages from the bot
     
     // Remove whitespace from chat message
-    const commandName = msg.trim();
+  const commandName = msg.trim();
+  if (!(commandName[0]==='!')) { return; } // Ignore messages from the bot
 
-    if (commandName.includes("!d") &&!isNaN(parseInt(commandName.substring(2)))){
-        num = parseInt(commandName.substring(2))
-        client.say(target, `You rolled a ${rollDice(num)}`);
-    } else{
-        
-        switch(commandName){
-            case "!discord":
-                client.say(target, `Come join the Toaster Discord! https://discord.gg/5U3K82F7Hw`);
-                break;
-            case "!lurk":
-                client.say(target, `WE CRAWL AND SEEP INSIDE THE SKIN`);
-                break;
-    
-            default:
-                console.log(`* Unknown command ${commandName}`);
-        }
-    }
-   
+  switch(commandName){
+    case "!discord":
+      client.say(target, `Come join the Toaster Discord! https://discord.gg/5U3K82F7Hw`);
+      break;
+      
+    case "!lurk":
+      client.say(target, `WE CRAWL AND SEEP INSIDE THE SKIN`);
+      break;
+
+    case "!flipacoin":
+      num = rollDice(2);
+      if (num == 1){
+        client.say(target, `You got heads`);
+      } else{
+        client.say(target, `You got tails`);
+      }
+      break;
+
+    default:
+      subCommands(commandName)
+  }
+
+}
+
+function subCommands(commandName){
+  console.log(`* Unknown command ${commandName}`);
 }
 
 // Function called when the "dice" command is issued
