@@ -4,10 +4,10 @@ require('dotenv').config()
 // Define configuration options
 const opts = {
   identity: {
-    username: 'frankytoaster',
-    password: 'o963lifj9zhdmi7dn5rzr0swg1px3g'
+    username: process.env.bot,
+    password:  process.env.pass
   },
-  channels: ['frankytoast']
+  channels:[process.env.channels]
 };
 
 const diceRolls = {
