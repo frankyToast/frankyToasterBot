@@ -36,12 +36,14 @@ client.on('connected', onConnectedHandler);
 // Connect to Twitch:
 client.connect();
 
+
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) {
   if (self) { return; } // Ignore messages from the bot
     
     // Remove whitespace from chat message
   const commandName = msg.trim();
+
   if (!(commandName[0]==='!')) { return; } // Ignore messages from the bot
 
   switch(commandName){
@@ -56,7 +58,7 @@ function onMessageHandler (target, context, msg, self) {
     case "!flipacoin":
       num = parseInt(Math.random() * 2) + 1;
       if (num == 1){
-        client.say(target, `You got heads`);
+        client.say(target, `${target} got heads`);
       } else{
         client.say(target, `You got tails`);
       }
@@ -136,7 +138,7 @@ function diceRoll(commandName){
   }
 
   if (numRolls == 1){
-    return `After rolling a ${diceSize} die, ${numRolls} time, you got ${sum}`;
+    return `You got ${sum}!`;
   } else{
     return `After rolling a ${diceSize} die, ${numRolls} times, you got ${sum}`;
 
