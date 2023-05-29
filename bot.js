@@ -10,6 +10,7 @@ const opts = {
   channels:[process.env.channels]
 };
 
+// Valid syntax for diceRoll commands
 const diceRolls = {
   0: true,
   1: true,
@@ -53,7 +54,7 @@ function onMessageHandler (target, context, msg, self) {
       break;
 
     case "!flipacoin":
-      num = numRand(2);
+      num = parseInt(Math.random() * 2) + 1;
       if (num == 1){
         client.say(target, `You got heads`);
       } else{
@@ -69,6 +70,7 @@ function onMessageHandler (target, context, msg, self) {
 
 }
 
+// Verifies if the command is in a proper dice syntax
 function diceRollCheck(commandName){
   var dcharIndex = -1;
   var dCount = 0;
@@ -104,6 +106,7 @@ function diceRollCheck(commandName){
   return true;
 }
 
+// the function for a dice roll
 function diceRoll(commandName){
 
   // finds the index of the D in the command
@@ -128,7 +131,8 @@ function diceRoll(commandName){
   // finds the sum of the num of rolls
   var sum = 0
   for (let i = 0; i < numRolls; ++i){
-    sum += numRand(diceSize)
+    diceRoll = parseInt(Math.random() * diceSize) + 1;
+    sum += diceRoll
   }
 
   if (numRolls == 1){
@@ -137,12 +141,6 @@ function diceRoll(commandName){
     return `After rolling a ${diceSize} die, ${numRolls} times, you got ${sum}`;
 
   }
-}
-
-// Function called when the "dice" command is issued
-function numRand (num) {
-  const sides = num;
-  return parseInt(Math.random() * sides) + 1;
 }
 
 // Called every time the bot connects to Twitch chat
