@@ -1,5 +1,6 @@
 const tmi = require('tmi.js');
-require('dotenv').config()
+require('dotenv').config();
+const mc_twitch_chat = false;
 
 // Define configuration options
 const opts = {
@@ -40,13 +41,15 @@ client.connect();
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) {
   if (self) { return; } // Ignore messages from the bot
-    
-    // Remove whitespace from chat message
-  const commandName = msg.trim();
+//Checks to see who submitted the commit
 
-  if (!(commandName[0]==='!')) { return; } // Ignore messages from the bot
+  // console.log(target.substring(1));
 
-  switch(commandName){
+  const command = msg.trim();
+//Checks if message is a command
+  if (!(command[0]==='!')) { return; } // Ignore messages from the bot
+
+  switch(command){
     case "!discord":
       client.say(target, `Come join the Toaster Discord! https://discord.gg/5U3K82F7Hw`);
       break;
@@ -63,27 +66,24 @@ function onMessageHandler (target, context, msg, self) {
         client.say(target, `You got tails`);
       }
       break;
-
-    default:
-      if (diceRollCheck(commandName)){
-        client.say(target, `${diceRoll(commandName)}`);
-      }
   }
+
+  if (diceRollCheck(command)){
+    client.say(target, `${diceRoll(command)}`);
+  } 
 
 }
 
 // Verifies if the command is in a proper dice syntax
-function diceRollCheck(commandName){
+function diceRollCheck(command){
   var dcharIndex = -1;
   var dCount = 0;
   
   // goes through each char in command and checks it
-  for(let i = 0; i < commandName.length; i++){
-    var character = String(commandName[i])
+  for(let i = 0; i < command.length; i++){
+    var character = String(command[i])
     // checks if a char is not part of the diceRolls char
     if (!(character in diceRolls)){
-      console.log(character);
-      console.log(`CHAR NOT IN DICEROLL`);
       return false;
     }
 
@@ -100,8 +100,7 @@ function diceRollCheck(commandName){
   }
 
   // If d does not exist or is at the end of the command
-  if (dcharIndex === -1 || dcharIndex === (commandName.length -1)){
-    console.log(`INVALID D CHAR PLACEMENT`);
+  if (dcharIndex === -1 || dcharIndex === (command.length -1)){
     return false;
   }
 
@@ -109,25 +108,25 @@ function diceRollCheck(commandName){
 }
 
 // the function for a dice roll
-function diceRoll(commandName){
+function diceRoll(command){
 
   // finds the index of the D in the command
   var dcharIndex = 0;
-  for(let i = 0; i < commandName.length; i++){
-    var character = String(commandName[i])
+  for(let i = 0; i < command.length; i++){
+    var character = String(command[i])
     if (character === "d"){dcharIndex = i;}
   }
 
   // find the number of rolls 
   var numRolls = 1
   if(dcharIndex > 1){
-    charNumRoll = commandName.substring(1,dcharIndex+1)
+    charNumRoll = command.substring(1,dcharIndex+1)
     numRolls = parseInt(charNumRoll)
   }
 
   // find the size of the dice
   var diceSize = 0;
-  charDiceSize = commandName.substring(dcharIndex+1,commandName.length)
+  charDiceSize = command.substring(dcharIndex+1,command.length)
   diceSize = parseInt(charDiceSize)
   
   // finds the sum of the num of rolls
