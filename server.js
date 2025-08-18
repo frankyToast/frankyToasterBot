@@ -1,18 +1,32 @@
 // imports
 const express = require('express');
 const axios = require('axios');
+const fs = require("fs");
+const { spawn } = require("child_process");
+
 
 require('dotenv').config(); // allows to put sensitive information in .env file
 
-
 const app = express();
 const PORT = 3000;
+const ENV_FILE = './.env';
 
-app.get('/', async (req, res) => {
-  const code = req.query.code;
-  if (!code) return res.send('No code found. Make sure you authorize the app!');
+// Update .env vars as needed
+function updateEnv(var_name, new_value) {
+  let envVars = fs.readFileSync(ENV_FILE, 'utf-8').split('\n');
 
-  console.log('OAuth code:', code);
+  envVars = envVars.map(line => {
+    if (line.startsWith(var_name)) return `${var_name}=${new_value}`;
+    return line;
+  });
+
+  fs.writeFileSync(ENV_FILE, envVars.join('\n'));
+  console.log(`Updated .env ${var_name} to ${new_value}.`);
+}
+
+//get the token from twitch
+async function fetchToken({ code = null } = {}) {
+  if (!code) throw error;
 
   try {
     const response = await axios.post('https://id.twitch.tv/oauth2/token', null, {
@@ -24,18 +38,84 @@ app.get('/', async (req, res) => {
         redirect_uri: process.env.REDIRECT_URI
       }
     });
-
+    
+    // console.log(response)
     const { access_token, refresh_token, expires_in } = response.data;
-    console.log('Access Token:', access_token);
-    console.log('Refresh Token:', refresh_token);
-    console.log('Expires in:', expires_in);
 
-    res.send('Token received! Check the console.');
+    updateEnv("ACCESS_TOKEN", access_token);
+    updateEnv("REFRESH_TOKEN", refresh_token);
+    updateEnv("EXPIRES_IN", expires_in);
+  
+    startCountdown(expires_in);
+
   } catch (err) {
-    console.error(err.response?.data || err.message);
-    res.send('Error exchanging code.');
+    console.error("❌ Token fetch error:", err.response?.data || err.message);
+    throw err;
+  }
+}
+
+async function refreshAccessToken({ code = null } = {}) {
+  let refreshToken = process.env.REFRESH_TOKEN;
+
+  if (!refreshToken) throw new Error("No refresh token available");
+
+  const response = await axios.post(
+    "https://id.twitch.tv/oauth2/token",
+    null,
+    {
+      params: {
+        client_id: process.env.CLIENT_ID,
+        client_secret: process.env.CLIENT_SECRET,
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+      },
+    }
+  );
+
+  const { access_token, refresh_token, expires_in } = response.data;
+
+  updateEnv("ACCESS_TOKEN", access_token);
+  updateEnv("REFRESH_TOKEN", refresh_token);
+  updateEnv("EXPIRES_IN", expires_in);
+
+  startCountdown(expires_in);
+  console.log("🔄 Token refreshed");
+}
+
+
+async function startCountdown(countdown) {
+  while (true){
+    tmiProcess = spawn("node", ["./twitch-bot.js"], {stdio: "inherit",});
+    
+    countdown = process.env.EXPIRES_IN;
+    while(countdown>120){
+      await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1 second
+      countdown--;
+    }
+
+    tmiProcess.kill();              // kills the script
+    tmiProcess = null;
+    refreshAccessToken();           // returns new access_token + expires_in
+  }
+}
+
+
+app.get("/twitch-auth", async (req, res) => {
+  const code = req.query.code;
+  if (!code) return res.send("No code provided!");
+
+  try {
+    await fetchToken({ code }); // just call the function
+    res.send("Token received, check console!");
+  } catch {
+    res.send("Error exchanging code.");
   }
 });
+
+app.get("/", (req, res) => {
+  res.send("Express is running!");
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

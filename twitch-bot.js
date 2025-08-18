@@ -6,7 +6,7 @@ require('dotenv').config();       // allows to put sensitive information in .env
 const opts = {
   identity: {
     username: process.env.bot,
-    password:  process.env.BOT_OAUTH
+    password:  process.env.ACCESS_TOKEN
   },
   channels:process.env.CHANNELS.split(",")
 };
@@ -21,7 +21,9 @@ client.on('connected', onConnectedHandler);
 
 // Connect to Twitch:
 client.connect();
-console.log(process.env.channels)
+console.log(opts.identity.username) //test to see what channel are modding
+// console.log(opts.identity.password) //test to see what channel are modding
+console.log(opts.channels) //test to see what channel are modding
 
 
 /////////////////////////////////////////////////////////
@@ -60,7 +62,7 @@ function onMessageHandler (target, context, msg, self) {
   if (self){return;}
 
   if(msg === '!discord') {
-    client.say(target, `Come join the Toaster Discord! https://discord.gg/5U3K82F7Hw`);
+    client.say(target, `Come join the Toaster! https://discord.gg/5U3K82F7Hw`);
   }
 
   if(msg === '!lurk') {
