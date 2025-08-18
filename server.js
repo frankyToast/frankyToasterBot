@@ -4,13 +4,18 @@ const axios = require('axios');
 const fs = require("fs");
 const { spawn } = require("child_process");
 
-
 require('dotenv').config(); // allows to put sensitive information in .env file
 
 const app = express();
 const PORT = 3000;
 const ENV_FILE = './.env';
 
+function log(message) {
+  const timestamp = new Date().toISOString();
+  fs.appendFileSync("log.txt", `[${timestamp}] ${message}\n`);
+}
+
+log(`server.js: start of server`)
 // Update .env vars as needed
 function updateEnv(var_name, new_value) {
   let envVars = fs.readFileSync(ENV_FILE, 'utf-8').split('\n');
@@ -21,8 +26,9 @@ function updateEnv(var_name, new_value) {
   });
 
   fs.writeFileSync(ENV_FILE, envVars.join('\n'));
-  console.log(`Updated .env ${var_name} to ${new_value}.`);
+  log(`server.js: Updated .env ${var_name} to ${new_value}.`);
 }
+
 
 //get the token from twitch
 async function fetchToken({ code = null } = {}) {
@@ -49,7 +55,7 @@ async function fetchToken({ code = null } = {}) {
     startCountdown(expires_in);
 
   } catch (err) {
-    console.error("❌ Token fetch error:", err.response?.data || err.message);
+    log(`server.js: Token fetch error: ${err.response?.data || err.message}`);
     throw err;
   }
 }
@@ -79,7 +85,7 @@ async function refreshAccessToken({ code = null } = {}) {
   updateEnv("EXPIRES_IN", expires_in);
 
   startCountdown(expires_in);
-  console.log("🔄 Token refreshed");
+  log(`server.js: refreshed the tokens`);
 }
 
 
@@ -91,6 +97,7 @@ async function startCountdown(countdown) {
     while(countdown>120){
       await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1 second
       countdown--;
+      // console.log(countdown)
     }
 
     tmiProcess.kill();              // kills the script
@@ -118,7 +125,5 @@ app.get("/", (req, res) => {
 
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-  console.log(`Visit this URL to authorize your bot:`);
-  console.log(`https://id.twitch.tv/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.REDIRECT_URI)}&response_type=code&scope=chat:read+chat:edit`);
+  log(`server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.REDIRECT_URI)}&response_type=code&scope=chat:read+chat:edit`);
 });

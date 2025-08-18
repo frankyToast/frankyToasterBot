@@ -1,11 +1,17 @@
 const TMI = require('tmi.js');    // imports use of tmi.js located in
 require('dotenv').config();       // allows to put sensitive information in .env file
+const fs = require("fs");
+
+function log(message) {
+  const timestamp = new Date().toISOString();
+  fs.appendFileSync("log.txt", `[${timestamp}] ${message}\n`);
+}
 
 
 // Define configuration options for tmi.js to log into Twitch Chatbot using info form .env
 const opts = {
   identity: {
-    username: process.env.bot,
+    username: process.env.BOT,
     password:  process.env.ACCESS_TOKEN
   },
   channels:process.env.CHANNELS.split(",")
@@ -21,9 +27,11 @@ client.on('connected', onConnectedHandler);
 
 // Connect to Twitch:
 client.connect();
-console.log(opts.identity.username) //test to see what channel are modding
-// console.log(opts.identity.password) //test to see what channel are modding
-console.log(opts.channels) //test to see what channel are modding
+
+// Test Code
+// console.log(`Twitch-Bot Username: ${opts.identity.username}`) //test to see what channel are modding
+// console.log(`Twitch-Bot Password: ${opts.identity.password}`) //test to see what channel are modding
+// console.log(`Twitch-Bot Channels: ${opts.channels}`) //test to see what channel are modding
 
 
 /////////////////////////////////////////////////////////
@@ -59,6 +67,7 @@ function onMessageHandler (target, context, msg, self) {
   user = context.username
   msg = msg.toLowerCase();
 
+  // console.log(client.getUsername())
   if (self){return;}
 
   if(msg === '!discord') {
@@ -82,9 +91,12 @@ function onMessageHandler (target, context, msg, self) {
     client.say(target, `@${user} ${diceRoll(msg)}`);
   }
 
+  log(`twitch-bot.js: ${client.getUsername()} responded to ${user} on ${target}`);
+
 }
 
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
-  console.log(`* Connected to ${addr}:${port}`);
+  log(`twitch-bot.js: ${client.getUsername()} connected to twitch`);
+  // console.log(`* Connected to ${addr}:${port}`);
 }
