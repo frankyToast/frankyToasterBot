@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "@minecraft-js/rcon": "^1.1.0",
+    "axios": "^1.11.0",
     "dotenv": "^16.0.3",
+    "express": "^5.1.0",
     "tmi.js": "^1.8.5"
   }
 }

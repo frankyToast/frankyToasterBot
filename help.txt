@@ -1,0 +1,16 @@
+helpful tips:
+    run the code in terminal using, "node <filename>"
+
+server.js
+    8/17/2025
+        -using the Twitch Developer we set a server that pulls from Twitch to get
+            - access token, refresh token
+        -in the .env file replace BOT_OAUTH with access token
+
+twitch-bot.js
+    8/17/2025
+        -need to run server to get access token
+        -replace access token in .env with server response
+        -changed the diceroll command to use regex and be simplier
+        -change the format of its return so that it can do multiple dicerolls
+
