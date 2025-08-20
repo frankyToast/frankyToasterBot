@@ -1,10 +1,14 @@
 helpful tips:
-    run the code in terminal using, "node <filename>"
+    run the code in terminal using, "node server.js"
 
 server.js
     8/17/2025
         -using the Twitch Developer we set a server that pulls from Twitch to get
             - access token, refresh token
+
+    8/20/2025
+        - incorporate twitch-bot.js into code so that when it runs the server it runs the bot
+        - should be able to automatically send REFRESH_TOKEN to server and reset
 
 twitch-bot.js
     8/17/2025
@@ -14,3 +18,16 @@ twitch-bot.js
         -change the format of its return so that it can do multiple diceroll
         -the password for the bot is the access token
 
+    8/20/2025
+        - able to run commands based off of user-commands.json
+        - able to soft reset when commands are adjusted to json without having to rerun server
+
+common.js
+    8/20/2025
+        - contains common functs that is used in both js files
+            - log function: prints message into both console and log file
+            - updateEnv: changes env values
+
+user-command.json
+    8/20/2025
+        - formate to give custom users commands that only return text messages 
