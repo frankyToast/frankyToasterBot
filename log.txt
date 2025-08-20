@@ -1,9 +1,7 @@
-[2025-08-18T22:00:10.563Z] twitch-bot.js: frankytoast connected to twitch
-[2025-08-18T22:00:59.797Z] twitch-bot.js: frankytoast responded to frankytoast on #frankytoast
-[2025-08-18T22:18:37.435Z] server.js: start of server
-[2025-08-18T22:18:37.438Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-08-18T22:19:00.033Z] server.js: Updated .env ACCESS_TOKEN to qsga7b8cvqce635xfo6hrxjh9mxmdi.
-[2025-08-18T22:19:00.034Z] server.js: Updated .env REFRESH_TOKEN to zw4kgalx2hac9b0jpqg1a3g8qx5halggbtky3tn40k7kpgaezr.
-[2025-08-18T22:19:00.034Z] server.js: Updated .env EXPIRES_IN to 13693.
-[2025-08-18T22:19:00.703Z] twitch-bot.js: frankytoast connected to twitch
-[2025-08-18T22:19:17.222Z] twitch-bot.js: frankytoast responded to frankytoast on #frankytoast
+[2025-08-20T16:59:01.869Z] server.js: start of server
+[2025-08-20T16:59:01.873Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-08-20T16:59:06.572Z] server.js: Updated .env ACCESS_TOKEN to ky8mp46hcjmnjphjep75wxflov07rh.
+[2025-08-20T16:59:06.573Z] server.js: Updated .env REFRESH_TOKEN to 68l9cz26nxvlekjjx0trpdrbu2p1ji43ms0ro322ro6dl2saq2.
+[2025-08-20T16:59:06.574Z] server.js: Updated .env EXPIRES_IN to 13403.
+[2025-08-20T16:59:07.265Z] twitch-bot.js: frankytoaster connected to twitch
+[2025-08-20T16:59:26.053Z] twitch-bot.js: frankytoaster responded to !lurk by frankytoaster on #setscet

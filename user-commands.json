@@ -1,0 +1,14 @@
+{
+  "reset-env": false,
+  "#frankytoast": {
+    "!discord": "Come join the Toaster! https://discord.gg/5U3K82F7Hw",
+    "!lurk": "I see you creepin"
+  },
+  "#setscet": {
+    "!franky": "test!",
+    "!lurk": "wrong one!"
+  },
+  "#generalgravey": {
+    "!franky": "test!"
+  }
+}

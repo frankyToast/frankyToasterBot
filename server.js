@@ -9,25 +9,9 @@ require('dotenv').config(); // allows to put sensitive information in .env file
 const app = express();
 const PORT = 3000;
 const ENV_FILE = './.env';
-
-function log(message) {
-  const timestamp = new Date().toISOString();
-  fs.appendFileSync("log.txt", `[${timestamp}] ${message}\n`);
-}
+const { updateEnv, log } = require("./common");
 
 log(`server.js: start of server`)
-// Update .env vars as needed
-function updateEnv(var_name, new_value) {
-  let envVars = fs.readFileSync(ENV_FILE, 'utf-8').split('\n');
-
-  envVars = envVars.map(line => {
-    if (line.startsWith(var_name)) return `${var_name}=${new_value}`;
-    return line;
-  });
-
-  fs.writeFileSync(ENV_FILE, envVars.join('\n'));
-  log(`server.js: Updated .env ${var_name} to ${new_value}.`);
-}
 
 
 //get the token from twitch
@@ -45,7 +29,6 @@ async function fetchToken({ code = null } = {}) {
       }
     });
     
-    // console.log(response)
     const { access_token, refresh_token, expires_in } = response.data;
 
     updateEnv("ACCESS_TOKEN", access_token);
@@ -88,7 +71,6 @@ async function refreshAccessToken({ code = null } = {}) {
   log(`server.js: refreshed the tokens`);
 }
 
-
 async function startCountdown(countdown) {
   while (true){
     tmiProcess = spawn("node", ["./twitch-bot.js"], {stdio: "inherit",});
@@ -97,7 +79,6 @@ async function startCountdown(countdown) {
     while(countdown>120){
       await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1 second
       countdown--;
-      // console.log(countdown)
     }
 
     tmiProcess.kill();              // kills the script
@@ -122,7 +103,6 @@ app.get("/twitch-auth", async (req, res) => {
 app.get("/", (req, res) => {
   res.send("Express is running!");
 });
-
 
 app.listen(PORT, () => {
   log(`server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.REDIRECT_URI)}&response_type=code&scope=chat:read+chat:edit`);

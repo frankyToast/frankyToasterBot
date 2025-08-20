@@ -1,37 +1,58 @@
 const TMI = require('tmi.js');    // imports use of tmi.js located in
 require('dotenv').config();       // allows to put sensitive information in .env file
 const fs = require("fs");
+const { log } = require("./common");
 
-function log(message) {
-  const timestamp = new Date().toISOString();
-  fs.appendFileSync("log.txt", `[${timestamp}] ${message}\n`);
-}
+// init all known users and their commands
+const configPath = "./user-commands.json";
+let userCommands = JSON.parse(fs.readFileSync("user-commands.json", "utf-8"));
 
 
-// Define configuration options for tmi.js to log into Twitch Chatbot using info form .env
+// create twitch api obj
 const opts = {
   identity: {
     username: process.env.BOT,
     password:  process.env.ACCESS_TOKEN
   },
-  channels:process.env.CHANNELS.split(",")
+  channels:Object.keys(userCommands).filter(ch => ch !== "reset-env")
 };
 
-
-// Create TMI client to connect to Twitch
-const client = new TMI.client(opts);
-
-// assign event handlers for client for when it is connected and when a message appears
+let client;
+client = new TMI.client(opts);
 client.on('message', onMessageHandler);
 client.on('connected', onConnectedHandler);
-
-// Connect to Twitch:
+client.on("notice", (channel, msgid, message) => {
+  log(`twitch-bot.js: [NOTICE from Twitch] ${channel}: ${msgid} - ${message}`);
+});
 client.connect();
+client.getChannels().forEach(ch => log(`Joined channel: ${ch}`));
 
-// Test Code
-// console.log(`Twitch-Bot Username: ${opts.identity.username}`) //test to see what channel are modding
-// console.log(`Twitch-Bot Password: ${opts.identity.password}`) //test to see what channel are modding
-// console.log(`Twitch-Bot Channels: ${opts.channels}`) //test to see what channel are modding
+// whenever it detects a restart in .json it resets twtich api obj
+function softRestart() {
+  log(`twitch-bot.js: Soft restart started`)
+
+  const config = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+  config["reset-env"] = false;
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
+
+  const opts = {
+    identity: {
+      username: process.env.BOT,
+      password:  process.env.ACCESS_TOKEN
+    },
+    channels:Object.keys(userCommands).filter(ch => ch !== "reset-env")
+  };
+
+  log(`twitch-bot.js: Channels in user-commands.js: ${Object.keys(userCommands).filter(ch => ch !== "reset-env")}`)
+
+
+  client = new TMI.client(opts);
+  client.on('message', onMessageHandler);
+  client.on('connected', onConnectedHandler);
+  client.connect();
+
+  log("twitch-bot.js: Soft restart completed!");
+}
 
 
 /////////////////////////////////////////////////////////
@@ -63,40 +84,49 @@ function diceRoll(msg){
 /////////////////////////////////////////////////////////
 
 //designing the bot to respond to commands in chat
-function onMessageHandler (target, context, msg, self) {
-  user = context.username
-  msg = msg.toLowerCase();
+function onMessageHandler (channel, context, message, self) {
+  const user = context.username;
+  const msg = message.toLowerCase().trim();
 
-  // console.log(client.getUsername())
-  if (self){return;}
 
-  if(msg === '!discord') {
-    client.say(target, `Come join the Toaster! https://discord.gg/5U3K82F7Hw`);
+  //checks to see if twitch-bot.js needs to be soft reset, if it does soft restart
+  let userCommands = JSON.parse(fs.readFileSync("user-commands.json", "utf-8"));
+  if (userCommands['reset-env'] == true){
+    client.disconnect();
+    softRestart();
+  }
+  
+
+  // checks if command is available per 
+  let commandComplete = false;
+
+  // checks text commands per user
+  let commandsForChannel = userCommands[channel];
+  if (commandsForChannel && msg in commandsForChannel) {
+    client.say(channel, `${commandsForChannel[msg]}`);
+    commandComplete = true;
   }
 
-  if(msg === '!lurk') {
-    client.say(target, `WE CRAWL AND SEEP INSIDE THE SKIN`);
-  }
-
-  if(msg === '!flipacoin') {
+  else if(msg === '!flipacoin') {
     num = parseInt(Math.random() * 2) + 1;
-    if (num == 1){
-      client.say(target, `@${user} got heads`);
-    } else{
-      client.say(target, `@${user} got tails`);
-    }
+    if (num == 1){client.say(channel, `@${user} got heads`);}
+    else{client.say(channel, `@${user} got tails`);}
+	  commandComplete = true;
   }
 
-  if(DICEROLL_PATTERN.test(msg)){
-    client.say(target, `@${user} ${diceRoll(msg)}`);
+  else if(DICEROLL_PATTERN.test(msg)){
+    client.say(channel, `@${user} ${diceRoll(msg)}`);
+	  commandComplete = true;
+
   }
-
-  log(`twitch-bot.js: ${client.getUsername()} responded to ${user} on ${target}`);
-
+  
+  if (commandComplete == true){
+    log(`twitch-bot.js: ${client.getUsername()} responded to ${msg} by ${user} on ${channel}`);    commandComplete = false;
+  }
+ 
 }
 
 // Called every time the bot connects to Twitch chat
 function onConnectedHandler (addr, port) {
   log(`twitch-bot.js: ${client.getUsername()} connected to twitch`);
-  // console.log(`* Connected to ${addr}:${port}`);
 }
