@@ -1,6 +1,18 @@
-helpful tips:
-    run the code in terminal using, "node server.js"
+SETUP INSTRUCTIONS:
+    1. create your developer app on twitch https://dev.twitch.tv/ with bot account
+    2. from https://dev.twitch.tv/ get your CLIENT_ID, CLIENT_SECRET
+    3. change "OAuth Redirect URLs" to <http://localhost:3000/twitch-auth>
+    4. fill in the info into the .env
+        a. BOT = bot account channel name
+        b. CHANNELS = channels the bot monitors
+        c. CLIENT_ID = received from https://dev.twitch.tv/
+        d. CLIENT_SECRET = received from https://dev.twitch.tv/
+        e. REDIRECT_URI = http://localhost:3000/twitch-auth
+        f. leave ACCESS_TOKEN, REFRESH_TOKEN and EXPIRES_IN blank
+    5. run the code in terminal using, "node server.js"
 
+
+DEV NOTES
 server.js
     8/17/2025
         -using the Twitch Developer we set a server that pulls from Twitch to get

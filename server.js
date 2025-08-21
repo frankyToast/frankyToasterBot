@@ -3,22 +3,20 @@ const express = require('express');
 const axios = require('axios');
 const fs = require("fs");
 const { spawn } = require("child_process");
+const { updateEnv, log } = require("./common");
+require('dotenv').config(); 
 
-require('dotenv').config(); // allows to put sensitive information in .env file
 
 const app = express();
 const PORT = 3000;
 const ENV_FILE = './.env';
-const { updateEnv, log } = require("./common");
 
 log(`server.js: start of server`)
 
-
 //get the token from twitch
-async function fetchToken({ code = null } = {}) {
-  if (!code) throw error;
-
-  try {
+async function FetchToken({ code = null } = {}) {
+  try{
+    if (!code) throw err;
     const response = await axios.post('https://id.twitch.tv/oauth2/token', null, {
       params: {
         client_id: process.env.CLIENT_ID,
@@ -30,71 +28,82 @@ async function fetchToken({ code = null } = {}) {
     });
     
     const { access_token, refresh_token, expires_in } = response.data;
-
     updateEnv("ACCESS_TOKEN", access_token);
     updateEnv("REFRESH_TOKEN", refresh_token);
     updateEnv("EXPIRES_IN", expires_in);
-  
-    startCountdown(expires_in);
 
+    CountDown(expires_in);
+    // startCountdown(125);    //test
+  
   } catch (err) {
     log(`server.js: Token fetch error: ${err.response?.data || err.message}`);
     throw err;
   }
 }
 
-async function refreshAccessToken({ code = null } = {}) {
-  let refreshToken = process.env.REFRESH_TOKEN;
+async function RefreshAccessToken({ code = null } = {}) {
+  try{
+    let refreshToken = process.env.REFRESH_TOKEN;
+    if (!refreshToken) throw new Error("No refresh token available");
 
-  if (!refreshToken) throw new Error("No refresh token available");
+    const response = await axios.post(
+      "https://id.twitch.tv/oauth2/token",
+      null,
+      {
+        params: {
+          client_id: process.env.CLIENT_ID,
+          client_secret: process.env.CLIENT_SECRET,
+          grant_type: "refresh_token",
+          refresh_token: refreshToken,
+        },
+      }
+    );
 
-  const response = await axios.post(
-    "https://id.twitch.tv/oauth2/token",
-    null,
-    {
-      params: {
-        client_id: process.env.CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET,
-        grant_type: "refresh_token",
-        refresh_token: refreshToken,
-      },
-    }
-  );
+    const { access_token, refresh_token, expires_in } = response.data;
+    updateEnv("ACCESS_TOKEN", access_token);
+    updateEnv("REFRESH_TOKEN", refresh_token);
+    updateEnv("EXPIRES_IN", expires_in);
 
-  const { access_token, refresh_token, expires_in } = response.data;
+    log(`server.js: refreshed the tokens`);
 
-  updateEnv("ACCESS_TOKEN", access_token);
-  updateEnv("REFRESH_TOKEN", refresh_token);
-  updateEnv("EXPIRES_IN", expires_in);
+    CountDown(expires_in);
+    // startCountdown(125);    //test
 
-  startCountdown(expires_in);
-  log(`server.js: refreshed the tokens`);
+  } catch (err) {
+    log(`server.js: Token refresh error: ${err.response?.data || err.message}`);
+    throw err;
+  }
 }
 
-async function startCountdown(countdown) {
-  while (true){
+async function CountDown(expires_in) {
+  try{
     tmiProcess = spawn("node", ["./twitch-bot.js"], {stdio: "inherit",});
     
-    countdown = process.env.EXPIRES_IN;
-    while(countdown>120){
-      await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1 second
-      countdown--;
+    const refreshTime = (expires_in - 120) * 1000;
+    await new Promise(resolve => setTimeout(resolve, refreshTime));
+
+    if (tmiProcess) {
+      tmiProcess.kill();
+      tmiProcess = null;
     }
 
-    tmiProcess.kill();              // kills the script
-    tmiProcess = null;
-    refreshAccessToken();           // returns new access_token + expires_in
-  }
+    await RefreshAccessToken();
+
+    } catch (err) {
+      log(`server.js: CountDown error: ${err.response?.data || err.message}`);
+      throw err;
+    }
 }
 
 
 app.get("/twitch-auth", async (req, res) => {
-  const code = req.query.code;
-  if (!code) return res.send("No code provided!");
-
   try {
-    await fetchToken({ code }); // just call the function
+    const code = req.query.code;
+    if (!code) return res.send("No code provided!");
+
+    await FetchToken({ code }); // just call the function
     res.send("Token received, check console!");
+
   } catch {
     res.send("Error exchanging code.");
   }
