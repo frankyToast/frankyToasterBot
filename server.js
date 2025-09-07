@@ -6,10 +6,13 @@ const { spawn } = require("child_process");
 const { updateEnv, log } = require("./common");
 require('dotenv').config(); 
 
+const ENV_FILE = './.env';
+let ACCESS_TOKEN = '';
+let REFRESH_TOKEN = '';
+let EXPIRES_IN = '';
 
 const app = express();
 const PORT = 3000;
-const ENV_FILE = './.env';
 
 log(`server.js: start of server`)
 
@@ -28,22 +31,23 @@ async function FetchToken({ code = null } = {}) {
     });
     
     const { access_token, refresh_token, expires_in } = response.data;
-    updateEnv("ACCESS_TOKEN", access_token);
-    updateEnv("REFRESH_TOKEN", refresh_token);
-    updateEnv("EXPIRES_IN", expires_in);
+
+    ACCESS_TOKEN = access_token;
+    REFRESH_TOKEN = refresh_token;
+    EXPIRES_IN = expires_in;
 
     CountDown(expires_in);
     // startCountdown(125);    //test
   
   } catch (err) {
-    log(`server.js: Token fetch error: ${err.response?.data || err.message}`);
+    log(`server.js: FetchToken funct error: ${err.response?.data || err.message}`);
     throw err;
   }
 }
 
 async function RefreshAccessToken({ code = null } = {}) {
   try{
-    let refreshToken = process.env.REFRESH_TOKEN;
+    let refreshToken = REFRESH_TOKEN;
     if (!refreshToken) throw new Error("No refresh token available");
 
     const response = await axios.post(
@@ -60,9 +64,9 @@ async function RefreshAccessToken({ code = null } = {}) {
     );
 
     const { access_token, refresh_token, expires_in } = response.data;
-    updateEnv("ACCESS_TOKEN", access_token);
-    updateEnv("REFRESH_TOKEN", refresh_token);
-    updateEnv("EXPIRES_IN", expires_in);
+    ACCESS_TOKEN = access_token;
+    REFRESH_TOKEN = refresh_token;
+    EXPIRES_IN = expires_in;
 
     log(`server.js: refreshed the tokens`);
 
@@ -70,14 +74,20 @@ async function RefreshAccessToken({ code = null } = {}) {
     // startCountdown(125);    //test
 
   } catch (err) {
-    log(`server.js: Token refresh error: ${err.response?.data || err.message}`);
+    log(`server.js: RefreshAccessToken funct error: ${err.response?.data || err.message}`);
     throw err;
   }
 }
 
 async function CountDown(expires_in) {
   try{
-    tmiProcess = spawn("node", ["./twitch-bot.js"], {stdio: "inherit",});
+    
+    log(`server.js | Bot Name: ${process.env.BOT}`)
+    log(`server.js | ${ACCESS_TOKEN}`)
+
+    tmiProcess = spawn("node",
+      ["./twitch-bot.js", process.env.BOT, ACCESS_TOKEN],
+      {stdio: "inherit",});
     
     const refreshTime = (expires_in - 120) * 1000;
     await new Promise(resolve => setTimeout(resolve, refreshTime));

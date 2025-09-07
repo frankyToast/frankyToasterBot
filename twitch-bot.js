@@ -1,5 +1,4 @@
 const TMI = require('tmi.js');    // imports use of tmi.js located in
-require('dotenv').config();       // allows to put sensitive information in .env file
 const fs = require("fs");
 const { log } = require("./common");
 
@@ -8,11 +7,16 @@ const configPath = "./user-commands.json";
 let userCommands = JSON.parse(fs.readFileSync("user-commands.json", "utf-8"));
 
 
+const BOT_NAME = process.argv[2];
+const ACCESS_TOKEN = process.argv[3];
+log(`twitch-bot.js | ${BOT_NAME}`)
+log(`twitch-bot.js | ${ACCESS_TOKEN}`)
+
 // create twitch api obj
 const opts = {
   identity: {
-    username: process.env.BOT,
-    password:  process.env.ACCESS_TOKEN
+    username: BOT_NAME,
+    password:  ACCESS_TOKEN
   },
   channels:Object.keys(userCommands).filter(ch => ch !== "reset-env")
 };
@@ -37,11 +41,12 @@ function softRestart() {
 
   const opts = {
     identity: {
-      username: process.env.BOT,
-      password:  process.env.ACCESS_TOKEN
+      username: BOT_NAME,
+      password:  ACCESS_TOKEN
     },
     channels:Object.keys(userCommands).filter(ch => ch !== "reset-env")
   };
+
 
   log(`twitch-bot.js: Channels in user-commands.js: ${Object.keys(userCommands).filter(ch => ch !== "reset-env")}`)
 

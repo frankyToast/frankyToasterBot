@@ -1,20 +1,49 @@
-[2025-08-21T01:58:52.598Z] server.js: start of server
-[2025-08-21T01:58:52.601Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-08-21T01:59:05.909Z] server.js: Updated .env ACCESS_TOKEN to tpvhycplsfq6xrgigpjij0pc0ra02u.
-[2025-08-21T01:59:05.910Z] server.js: Updated .env REFRESH_TOKEN to rpmrb05ca879sh532vvu6p5pcudsck1fi4cb0meybkn6s978vr.
-[2025-08-21T01:59:05.911Z] server.js: Updated .env EXPIRES_IN to 13782.
-[2025-08-21T01:59:05.911Z] server.js: Token fetch error: startCountdown is not defined
-[2025-08-21T01:59:49.052Z] server.js: start of server
-[2025-08-21T01:59:49.056Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-08-21T01:59:53.860Z] server.js: Updated .env ACCESS_TOKEN to 8s10fsv04j7htjtayc0vpzs3p4x2jb.
-[2025-08-21T01:59:53.861Z] server.js: Updated .env REFRESH_TOKEN to 0x02ac5f87z5rgf6ilyn70v6qjpfh8ba220c1putw58capk1n6.
-[2025-08-21T01:59:53.862Z] server.js: Updated .env EXPIRES_IN to 14015.
-[2025-08-21T01:59:54.558Z] twitch-bot.js: frankytoaster connected to twitch
-[2025-08-21T02:00:06.461Z] twitch-bot.js: frankytoaster responded to !lurk by frankytoaster on #frankytoast
-[2025-08-21T02:00:11.873Z] twitch-bot.js: frankytoaster responded to !discord by frankytoaster on #frankytoast
-[2025-08-21T02:00:26.133Z] twitch-bot.js: frankytoaster responded to !lurk by frankytoaster on #setscet
-[2025-08-21T02:01:10.576Z] twitch-bot.js: Soft restart started
-[2025-08-21T02:01:10.577Z] twitch-bot.js: Channels in user-commands.js: #frankytoast,#setscet,#generalgravey
-[2025-08-21T02:01:10.578Z] twitch-bot.js: Soft restart completed!
-[2025-08-21T02:01:11.148Z] twitch-bot.js: frankytoaster connected to twitch
-[2025-08-21T02:01:16.721Z] twitch-bot.js: frankytoaster responded to !lurk by frankytoaster on #setscet
+[2025-09-06T19:29:04.084Z] server.js: start of server
+[2025-09-06T19:29:04.088Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-06T19:29:18.620Z] server.js: Updated .env ACCESS_TOKEN to ei0wtuxn972ndjolatfdt0nj8bv0au.
+[2025-09-06T19:29:18.621Z] server.js: Updated .env REFRESH_TOKEN to dfgn1tbsllh90laus8cnuewy6xa19dzxvhdd5j3pnp4hq2zhrc.
+[2025-09-06T19:29:18.622Z] server.js: Updated .env EXPIRES_IN to 15526.
+[2025-09-06T19:30:39.255Z] server.js: start of server
+[2025-09-06T19:30:39.258Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-06T19:43:16.972Z] server.js: start of server
+[2025-09-06T19:43:16.976Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-06T19:43:23.992Z] server.js: Updated .env ACCESS_TOKEN to iq75meitj24rvpm64oetnwdoane2re.
+[2025-09-06T19:43:23.992Z] server.js: Updated .env REFRESH_TOKEN to f667avmlhb3kwtmvrha5ax0q24dlfap275pkkzxd1lfu1nz8wb.
+[2025-09-06T19:43:23.993Z] server.js: Updated .env EXPIRES_IN to 14411.
+[2025-09-06T19:43:24.065Z] twitch-bot.js |frankyToaster
+[2025-09-06T19:43:24.068Z] twitch-bot.js |ei0wtuxn972ndjolatfdt0nj8bv0au
+[2025-09-06T19:43:24.686Z] twitch-bot.js: frankytoast connected to twitch
+[2025-09-06T19:44:26.195Z] server.js: start of server
+[2025-09-06T19:44:26.199Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-06T19:44:34.808Z] server.js: Updated .env ACCESS_TOKEN to wi9nu0dv53wi6movjaamnle2dta8cf.
+[2025-09-06T19:44:34.809Z] server.js: Updated .env REFRESH_TOKEN to 4ljy0aqu7klgjqyidibs29npcies97gbj27omzdvy9dgi2hogt.
+[2025-09-06T19:44:34.810Z] server.js: Updated .env EXPIRES_IN to 14114.
+[2025-09-06T19:44:34.810Z] server.js | frankyToaster
+[2025-09-06T19:44:34.810Z] server.js | iq75meitj24rvpm64oetnwdoane2re
+[2025-09-06T19:44:34.883Z] twitch-bot.js |frankyToaster
+[2025-09-06T19:44:34.885Z] twitch-bot.js |iq75meitj24rvpm64oetnwdoane2re
+[2025-09-06T19:44:35.470Z] twitch-bot.js: frankytoast connected to twitch
+[2025-09-06T19:46:55.753Z] twitch-bot.js: frankytoast responded to !d20 by frankytoast on #frankytoast
+[2025-09-07T04:53:47.095Z] server.js: start of server
+[2025-09-07T04:53:47.098Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-07T04:54:00.309Z] server.js | undefined
+[2025-09-07T04:54:00.310Z] server.js | 
+[2025-09-07T04:54:00.378Z] twitch-bot.js | undefined
+[2025-09-07T04:54:00.380Z] twitch-bot.js | 
+[2025-09-07T04:55:13.346Z] server.js: start of server
+[2025-09-07T04:55:13.350Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-07T04:55:23.795Z] server.js: Token fetch error: Assignment to constant variable.
+[2025-09-07T04:56:06.179Z] server.js: start of server
+[2025-09-07T04:56:06.183Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-07T04:56:20.945Z] server.js: Token fetch error: Assignment to constant variable.
+[2025-09-07T04:56:31.052Z] server.js: start of server
+[2025-09-07T04:56:31.056Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-07T04:56:40.607Z] server.js: Token fetch error: Assignment to constant variable.
+[2025-09-07T04:58:20.658Z] server.js: start of server
+[2025-09-07T04:58:20.662Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-07T04:58:28.641Z] server.js | Bot Name: undefined
+[2025-09-07T04:58:28.642Z] server.js | v7y2ahjta7m6zq5jmnzuiuq80e3a0f
+[2025-09-07T04:58:28.709Z] twitch-bot.js | undefined
+[2025-09-07T04:58:28.710Z] twitch-bot.js | v7y2ahjta7m6zq5jmnzuiuq80e3a0f
+[2025-09-07T04:58:29.352Z] twitch-bot.js: frankytoast connected to twitch
+[2025-09-07T04:59:14.410Z] twitch-bot.js: frankytoast responded to !d20 by frankytoast on #frankytoast
