@@ -11,6 +11,9 @@ SETUP INSTRUCTIONS:
 
 DEV NOTES
 server.js
+    9/19/2025
+        - changed logic so that it does not use countdown function and has less chance of infinite recursion
+
     9/7/2025
         - adjusted it so that refresh, access and expire tokens are not .env vars
 
@@ -22,9 +25,15 @@ server.js
         -using the Twitch Developer we set a server that pulls from Twitch to get
             - access token, refresh token
 
+.env
+    9/19/2025
+        - changed redirect_uri to TWITCH_AUTH_URL
+        - added url for event sub still WIP
 
+chat-bot.js
+    9/19/2025
+        - renamed from twitch-bot.js to chat-bot.js
 
-twitch-bot.js
     9/7/2025
         - adjusted it so that refresh, access and expire tokens are vars that are passed from server.js
 

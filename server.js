@@ -46,7 +46,7 @@ async function FetchToken({ code = null } = {}, refresh = false) {
           client_secret: process.env.CLIENT_SECRET,
           code: code,
           grant_type: 'authorization_code',
-          redirect_uri: process.env.REDIRECT_URI
+          redirect_uri: process.env.TWITCH_AUTH_URL
         }}
       );
     }
@@ -116,5 +116,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  log(`server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.REDIRECT_URI)}&response_type=code&scope=chat:read+chat:edit`);
+  log(`server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=${process.env.CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.TWITCH_AUTH_URL)}&response_type=code&scope=chat:read+chat:edit`);
 });
