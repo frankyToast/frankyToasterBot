@@ -9,8 +9,8 @@ let userCommands = JSON.parse(fs.readFileSync("user-commands.json", "utf-8"));
 
 const BOT_NAME = process.argv[2];
 const ACCESS_TOKEN = process.argv[3];
-log(`twitch-bot.js | ${BOT_NAME}`)
-log(`twitch-bot.js | ${ACCESS_TOKEN}`)
+// log(`twitch-bot.js | ${BOT_NAME}`)
+// log(`twitch-bot.js | ${ACCESS_TOKEN}`)
 
 // create twitch api obj
 const opts = {
@@ -23,6 +23,7 @@ const opts = {
 
 let client;
 client = new TMI.client(opts);
+
 client.on('message', onMessageHandler);
 client.on('connected', onConnectedHandler);
 client.on("notice", (channel, msgid, message) => {

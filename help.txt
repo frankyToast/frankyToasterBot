@@ -3,36 +3,42 @@ SETUP INSTRUCTIONS:
     2. from https://dev.twitch.tv/ get your CLIENT_ID, CLIENT_SECRET
     3. change "OAuth Redirect URLs" to <http://localhost:3000/twitch-auth>
     4. fill in the info into the .env
-        a. BOT = bot account channel name
-        b. CHANNELS = channels the bot monitors
-        c. CLIENT_ID = received from https://dev.twitch.tv/
-        d. CLIENT_SECRET = received from https://dev.twitch.tv/
-        e. REDIRECT_URI = http://localhost:3000/twitch-auth
-        f. leave ACCESS_TOKEN, REFRESH_TOKEN and EXPIRES_IN blank
+        a. CLIENT_ID = received from https://dev.twitch.tv/
+        b. CLIENT_SECRET = received from https://dev.twitch.tv/
+        c. REDIRECT_URI = http://localhost:3000/twitch-auth
     5. run the code in terminal using, "node server.js"
 
 
 DEV NOTES
 server.js
-    8/17/2025
-        -using the Twitch Developer we set a server that pulls from Twitch to get
-            - access token, refresh token
+    9/7/2025
+        - adjusted it so that refresh, access and expire tokens are not .env vars
 
     8/20/2025
         - incorporate twitch-bot.js into code so that when it runs the server it runs the bot
         - should be able to automatically send REFRESH_TOKEN to server and reset
 
-twitch-bot.js
     8/17/2025
-        -need to run server to get access token
-        -replace access token in .env with server response
-        -changed the diceroll command to use regex and be simplier
-        -change the format of its return so that it can do multiple diceroll
-        -the password for the bot is the access token
+        -using the Twitch Developer we set a server that pulls from Twitch to get
+            - access token, refresh token
+
+
+
+twitch-bot.js
+    9/7/2025
+        - adjusted it so that refresh, access and expire tokens are vars that are passed from server.js
 
     8/20/2025
         - able to run commands based off of user-commands.json
         - able to soft reset when commands are adjusted to json without having to rerun server
+
+    8/17/2025
+        -need to run server to get access token
+        -replace access token in .env with server response
+        -changed the diceroll command to use regex and be simpler
+        -change the format of its return so that it can do multiple diceroll
+        -the password for the bot is the access token
+
 
 common.js
     8/20/2025

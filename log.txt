@@ -1,49 +1,31 @@
-[2025-09-06T19:29:04.084Z] server.js: start of server
-[2025-09-06T19:29:04.088Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-06T19:29:18.620Z] server.js: Updated .env ACCESS_TOKEN to ei0wtuxn972ndjolatfdt0nj8bv0au.
-[2025-09-06T19:29:18.621Z] server.js: Updated .env REFRESH_TOKEN to dfgn1tbsllh90laus8cnuewy6xa19dzxvhdd5j3pnp4hq2zhrc.
-[2025-09-06T19:29:18.622Z] server.js: Updated .env EXPIRES_IN to 15526.
-[2025-09-06T19:30:39.255Z] server.js: start of server
-[2025-09-06T19:30:39.258Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-06T19:43:16.972Z] server.js: start of server
-[2025-09-06T19:43:16.976Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-06T19:43:23.992Z] server.js: Updated .env ACCESS_TOKEN to iq75meitj24rvpm64oetnwdoane2re.
-[2025-09-06T19:43:23.992Z] server.js: Updated .env REFRESH_TOKEN to f667avmlhb3kwtmvrha5ax0q24dlfap275pkkzxd1lfu1nz8wb.
-[2025-09-06T19:43:23.993Z] server.js: Updated .env EXPIRES_IN to 14411.
-[2025-09-06T19:43:24.065Z] twitch-bot.js |frankyToaster
-[2025-09-06T19:43:24.068Z] twitch-bot.js |ei0wtuxn972ndjolatfdt0nj8bv0au
-[2025-09-06T19:43:24.686Z] twitch-bot.js: frankytoast connected to twitch
-[2025-09-06T19:44:26.195Z] server.js: start of server
-[2025-09-06T19:44:26.199Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-06T19:44:34.808Z] server.js: Updated .env ACCESS_TOKEN to wi9nu0dv53wi6movjaamnle2dta8cf.
-[2025-09-06T19:44:34.809Z] server.js: Updated .env REFRESH_TOKEN to 4ljy0aqu7klgjqyidibs29npcies97gbj27omzdvy9dgi2hogt.
-[2025-09-06T19:44:34.810Z] server.js: Updated .env EXPIRES_IN to 14114.
-[2025-09-06T19:44:34.810Z] server.js | frankyToaster
-[2025-09-06T19:44:34.810Z] server.js | iq75meitj24rvpm64oetnwdoane2re
-[2025-09-06T19:44:34.883Z] twitch-bot.js |frankyToaster
-[2025-09-06T19:44:34.885Z] twitch-bot.js |iq75meitj24rvpm64oetnwdoane2re
-[2025-09-06T19:44:35.470Z] twitch-bot.js: frankytoast connected to twitch
-[2025-09-06T19:46:55.753Z] twitch-bot.js: frankytoast responded to !d20 by frankytoast on #frankytoast
-[2025-09-07T04:53:47.095Z] server.js: start of server
-[2025-09-07T04:53:47.098Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-07T04:54:00.309Z] server.js | undefined
-[2025-09-07T04:54:00.310Z] server.js | 
-[2025-09-07T04:54:00.378Z] twitch-bot.js | undefined
-[2025-09-07T04:54:00.380Z] twitch-bot.js | 
-[2025-09-07T04:55:13.346Z] server.js: start of server
-[2025-09-07T04:55:13.350Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-07T04:55:23.795Z] server.js: Token fetch error: Assignment to constant variable.
-[2025-09-07T04:56:06.179Z] server.js: start of server
-[2025-09-07T04:56:06.183Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-07T04:56:20.945Z] server.js: Token fetch error: Assignment to constant variable.
-[2025-09-07T04:56:31.052Z] server.js: start of server
-[2025-09-07T04:56:31.056Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-07T04:56:40.607Z] server.js: Token fetch error: Assignment to constant variable.
-[2025-09-07T04:58:20.658Z] server.js: start of server
-[2025-09-07T04:58:20.662Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
-[2025-09-07T04:58:28.641Z] server.js | Bot Name: undefined
-[2025-09-07T04:58:28.642Z] server.js | v7y2ahjta7m6zq5jmnzuiuq80e3a0f
-[2025-09-07T04:58:28.709Z] twitch-bot.js | undefined
-[2025-09-07T04:58:28.710Z] twitch-bot.js | v7y2ahjta7m6zq5jmnzuiuq80e3a0f
-[2025-09-07T04:58:29.352Z] twitch-bot.js: frankytoast connected to twitch
-[2025-09-07T04:59:14.410Z] twitch-bot.js: frankytoast responded to !d20 by frankytoast on #frankytoast
+[2025-09-18T22:01:34.350Z] server.js: start of server
+[2025-09-18T22:01:34.354Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=undefined&redirect_uri=undefined&response_type=code&scope=chat:read+chat:edit
+[2025-09-18T22:10:41.394Z] server.js: start of server
+[2025-09-18T22:10:41.398Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=undefined&redirect_uri=undefined&response_type=code&scope=chat:read+chat:edit
+[2025-09-18T22:14:38.736Z] server.js: start of server
+[2025-09-18T22:14:38.741Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=undefined&redirect_uri=undefined&response_type=code&scope=chat:read+chat:edit
+[2025-09-18T22:15:06.773Z] server.js: start of server
+[2025-09-18T22:15:06.776Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=undefined&redirect_uri=undefined&response_type=code&scope=chat:read+chat:edit
+[2025-09-18T22:34:10.247Z] server.js: start of server
+[2025-09-18T22:34:10.250Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-18T22:35:05.568Z] server.js: start of server
+[2025-09-18T22:35:05.572Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-18T22:35:15.548Z] server.js | Bot Name: undefined
+[2025-09-18T22:35:15.548Z] server.js | bczozwk16wkzf4auzo1gyat5wl4hyo
+[2025-09-18T22:35:15.630Z] twitch-bot.js | undefined
+[2025-09-18T22:35:15.631Z] twitch-bot.js | bczozwk16wkzf4auzo1gyat5wl4hyo
+[2025-09-18T22:35:16.224Z] twitch-bot.js: frankytoast connected to twitch
+[2025-09-18T22:35:35.314Z] twitch-bot.js: frankytoast responded to !lurk by frankytoast on #frankytoast
+[2025-09-19T00:22:14.939Z] server.js: start of server
+[2025-09-19T00:22:14.942Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-19T00:22:27.249Z] server.js | plg4p05yx7g7lgcbxmslu19zf07yv9
+[2025-09-19T00:22:27.255Z] server.js: Twitch_Auth error: expires_in is not defined
+[2025-09-19T00:23:35.053Z] server.js: start of server
+[2025-09-19T00:23:35.057Z] server.js: access website to authorize twitch https://id.twitch.tv/oauth2/authorize?client_id=dzkomketpxfecqqc7decqj1x6dbrja&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ftwitch-auth&response_type=code&scope=chat:read+chat:edit
+[2025-09-19T00:24:49.855Z] server.js | Twitch_Auth - ACCESS_TOKEN = 5n8cfyremwwwdjwbhaxgejmhsq9kuq
+[2025-09-19T00:24:49.915Z] twitch-bot.js | FrankyToaster
+[2025-09-19T00:24:49.917Z] twitch-bot.js | 5n8cfyremwwwdjwbhaxgejmhsq9kuq
+[2025-09-19T00:24:50.580Z] twitch-bot.js: frankytoast connected to twitch
+[2025-09-19T00:25:45.411Z] twitch-bot.js: frankytoast responded to !lurk by frankytoast on #frankytoast
+[2025-09-19T00:25:48.407Z] twitch-bot.js: frankytoast responded to !d30 by frankytoast on #frankytoast
+[2025-09-19T00:25:53.553Z] twitch-bot.js: frankytoast responded to !d30 ͏ by frankytoast on #frankytoast
